@@ -145,13 +145,19 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cAudioManager.cpp" />
+    <ClCompile Include="cGameManager.cpp" />
+    <ClCompile Include="cProjectManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CButton.cpp" />
     <ClCompile Include="CUIManager.cpp" />
     <ClCompile Include="CInputHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cAudioManager.h" />
     <ClInclude Include="CButton.h" />
+    <ClInclude Include="cLevelManager.h" />
+    <ClInclude Include="cProjectManager.h" />
     <ClInclude Include="CUIManager.h" />
     <ClInclude Include="CInputHandler.h" />
   </ItemGroup>
