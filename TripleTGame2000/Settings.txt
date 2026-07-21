@@ -1,0 +1,4 @@
+WindowWidth=1200
+WindowHeight=720
+VSync=0
+Volume=0.7

@@ -146,6 +146,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="CButton.cpp" />
+    <ClCompile Include="CUIManager.cpp" />
+    <ClCompile Include="CInputHandler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CButton.h" />
+    <ClInclude Include="CUIManager.h" />
+    <ClInclude Include="CInputHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
