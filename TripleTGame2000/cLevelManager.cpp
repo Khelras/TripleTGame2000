@@ -1,6 +1,10 @@
 #include "cLevelManager.h"
 #include "cAudioManager.h"
+#include "cTextureManager.h"
 #include <fstream> // Include fstream for reading
+
+// GameObject includes so LevelManager can spawn them
+#include "cCube.h"
 
 cLevelManager::cLevelManager(cAudioManager* _audiomanager)
 {
@@ -107,6 +111,40 @@ void cLevelManager::Unloadlevel()
 
 void cLevelManager::CreateActors()
 {
+	int TileSize = 32;
+	for (int y = 0; y < LevelHeight; y++)
+	{
+		for (int x = 0; x < LevelWidth; x++)
+		{
+			// Actor Pointers & Other Variables
+			cGameObject* NewActor = nullptr;
+
+
+			sf::Vector2f CurrentSpawnPosition = sf::Vector2f(x * TileSize, y * TileSize);
+			bool TriggerOnActivate = true;
+			bool IsntDynamic = false;
+			bool IsDynamic = true;
+
+
+			switch (m_LoadedLevelChars[y * LevelWidth + x])
+			{
+				// LabTile (X)
+				case 'X':
+					NewActor = new cCube(cTextureManager::GetInstance().m_CubeTex, IsDynamic);
+					NewActor->SetPosition(CurrentSpawnPosition);
+					//NewActor->SetSpawnPosition(CurrentSpawnPosition);
+
+					m_Actors.push_back(NewActor);
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
+
+	//SpawnDynamicObjects();
+	//ConnectTriggerActors();
 }
 
 void cLevelManager::Update(float _deltatime)
@@ -115,10 +153,10 @@ void cLevelManager::Update(float _deltatime)
 
 void cLevelManager::Draw(sf::RenderWindow* _window)
 {
-	//for (int i = 0; i < m_Actors.size(); i++)
-	//{
-	//	_window->draw(m_Actors[i]->GetSprite());
-	//}
+	for (int i = 0; i < m_Actors.size(); i++)
+	{
+		_window->draw(m_Actors[i]->GetSprite());
+	}
 }
 
 

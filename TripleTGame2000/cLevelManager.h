@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
+#include "cGameObject.h"
 #include <vector>
 #include <string>
 
@@ -12,7 +13,7 @@ public:
 	cLevelManager(cAudioManager* _audiomanager);
 	~cLevelManager();
 
-	//std::vector<cActor*> m_Actors;
+	std::vector<cGameObject*> m_Actors;
 	//std::vector<cTriggerActor*> m_TriggerActors;
 	//std::vector<cTriggerableActor*> m_TriggerableActors;
 

@@ -1,6 +1,6 @@
 #include "cGameObject.h"
 
-cGameObject::cGameObject(sf::Texture* _Texture)
+cGameObject::cGameObject(std::shared_ptr<sf::Texture> _Texture, bool _IsDynamic)
 {
 	m_Sprite = std::make_shared<sf::Sprite>(*_Texture);
 

@@ -2,10 +2,16 @@
 
 #include <SFML/Graphics.hpp>
 
+enum EObjectType
+{
+	NONE = 0,
+	WALL = 1,
+};
+
 class cGameObject
 {
 public:
-	cGameObject(sf::Texture* _Texture);
+	cGameObject(std::shared_ptr<sf::Texture> _Texture, bool _IsDynamic);
 	~cGameObject();
 
 	virtual void Start() = 0;
@@ -30,8 +36,10 @@ public:
 	sf::Vector2f inline GetPosition() { return m_Position; }
 
 protected:
+
 	sf::Vector2f m_Position;
 	sf::Angle m_Angle;
 	std::shared_ptr<sf::Sprite> m_Sprite;
+	bool m_IsDynamic;
 };
 
