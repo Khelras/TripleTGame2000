@@ -18,6 +18,39 @@ CUIManager* CUIManager::instance = nullptr;
 // How many levels the level select screen offers
 static const int LEVEL_COUNT = 6;
 
+CUILabel::CUILabel(const std::string& _sName, sf::Vector2f _vPosition, const std::string& _sText, const sf::Font& _font, int _iFontSize, sf::Color _color, bool _bCentered) : m_text(_font, _sText, _iFontSize), m_sName(_sName), m_vPosition(_vPosition), m_bCentered(_bCentered)
+{
+    m_text.setFillColor(_color);
+    Reposition();
+}
+
+void CUILabel::SetText(const std::string& _sText)
+{
+    m_text.setString(_sText);
+    Reposition(); // a centred label has to re-centre when the text length changes
+}
+
+void CUILabel::Draw(sf::RenderWindow& window)
+{
+    window.draw(m_text);
+}
+
+void CUILabel::Reposition()
+{
+    sf::FloatRect bounds = m_text.getLocalBounds();
+
+    if (m_bCentered)
+    {
+        m_text.setOrigin({ bounds.position.x + bounds.size.x / 2.0f, bounds.position.y + bounds.size.y / 2.0f });
+    }
+    else
+    {
+        m_text.setOrigin({ bounds.position.x, bounds.position.y });
+    }
+
+    m_text.setPosition(m_vPosition);
+}
+
 CUIManager* CUIManager::getInstance()
 {
     if (instance == nullptr)
@@ -53,6 +86,47 @@ CButton& CUIManager::AddButton(EUIState _eState, const std::string& _sText, sf::
     return *m_buttons[_eState].back();
 }
 
+CUILabel& CUIManager::AddLabel(EUIState _eState, const std::string& _sName, const std::string& _sText, float _fX, float _fY, int _iFontSize, sf::Color _color, bool _bCentered)
+{
+    sf::Vector2f position(m_vWindowSize.x * _fX, m_vWindowSize.y * _fY);
+
+    m_labels[_eState].push_back(std::make_unique<CUILabel>(
+        _sName, position, _sText, m_font, _iFontSize, _color, _bCentered));
+
+    return *m_labels[_eState].back();
+}
+
+CUILabel* CUIManager::FindLabel(const std::string& _sName)
+{
+    for (int i = 0; i < STATE_COUNT; i++)
+    {
+        for (auto& label : m_labels[i])
+        {
+            if (label->GetName() == _sName)
+                return label.get();
+        }
+    }
+    return nullptr;
+}
+
+bool CUIManager::SetLabelText(const std::string& _sName, const std::string& _sText)
+{
+    CUILabel* label = FindLabel(_sName);
+    if (label == nullptr) return false;
+
+    label->SetText(_sText);
+    return true;
+}
+
+bool CUIManager::SetLabelColor(const std::string& _sName, sf::Color _color)
+{
+    CUILabel* label = FindLabel(_sName);
+    if (label == nullptr) return false;
+
+    label->SetColor(_color);
+    return true;
+}
+
 void CUIManager::SetupUI(sf::Vector2u _vWindowSize)
 {
     m_vWindowSize = _vWindowSize;
@@ -61,6 +135,7 @@ void CUIManager::SetupUI(sf::Vector2u _vWindowSize)
     for (int i = 0; i < STATE_COUNT; i++)
     {
         m_buttons[i].clear();
+        m_labels[i].clear();
         m_fNextButtonY[i] = m_vWindowSize.y * 0.28f;
     }
 
@@ -160,6 +235,7 @@ void CUIManager::SetupUI(sf::Vector2u _vWindowSize)
     {
         SetState(MENU);
     });
+
 }
 
 // Shit works
@@ -188,6 +264,12 @@ void CUIManager::Draw(sf::RenderWindow& window)
     {
         button->Draw(window);
     }
+
+    // Labels last, so a HUD always sits on top
+    for (auto& label : m_labels[m_eCurrentState])
+    {
+        label->Draw(window);
+    }
 }
 
 void CUIManager::DrawTitle(sf::RenderWindow& window)
@@ -199,8 +281,7 @@ void CUIManager::DrawTitle(sf::RenderWindow& window)
     text.setFillColor(sf::Color::White);
 
     sf::FloatRect bounds = text.getLocalBounds();
-    text.setOrigin({ bounds.position.x + bounds.size.x / 2.f,
-                     bounds.position.y + bounds.size.y / 2.f });
+    text.setOrigin({ bounds.position.x + bounds.size.x / 2.f, bounds.position.y + bounds.size.y / 2.f });
     text.setPosition({ m_vWindowSize.x / 2.0f, m_vWindowSize.y * 0.15f });
 
     window.draw(text);

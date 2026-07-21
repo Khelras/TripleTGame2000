@@ -27,6 +27,27 @@ enum EUIState
     STATE_COUNT // Get the size
 };
 
+class CUILabel
+{
+public:
+    CUILabel(const std::string& _sName, sf::Vector2f _vPosition, const std::string& _sText, const sf::Font& _font, int _iFontSize, sf::Color _color, bool _bCentered);
+
+    const std::string& GetName() const { return m_sName; }
+
+    void SetText(const std::string& _sText);
+    void SetColor(sf::Color _color) { m_text.setFillColor(_color); }
+
+    void Draw(sf::RenderWindow& window);
+
+private:
+    sf::Text m_text;
+    std::string m_sName;
+    sf::Vector2f m_vPosition;
+    bool m_bCentered;
+
+    void Reposition();
+};
+
 class CUIManager
 {
 public:
@@ -52,6 +73,15 @@ public:
 
     CButton& AddButton(EUIState _eState, const std::string& _sText, sf::Color _color, std::function<void()> _onClick = nullptr);
 
+    CUILabel& AddLabel(EUIState _eState, const std::string& _sName, const std::string& _sText, float _fX, float _fY, int _iFontSize = 24, sf::Color _color = sf::Color::White, bool _bCentered = false);
+
+    // Returns false if no label by that name exists.
+    bool SetLabelText(const std::string& _sName, const std::string& _sText);
+    bool SetLabelColor(const std::string& _sName, sf::Color _color);
+
+    // nullptr if not found. Do not store this, SetupUI invalidates it.
+    CUILabel* FindLabel(const std::string& _sName);
+
 private:
     CUIManager() = default;
     CUIManager(const CUIManager&) = delete;
@@ -61,6 +91,7 @@ private:
 
     // unique_ptr so the references handed out by AddButton stay valid
     std::vector<std::unique_ptr<CButton>> m_buttons[STATE_COUNT];
+    std::vector<std::unique_ptr<CUILabel>> m_labels[STATE_COUNT];
     std::string m_titles[STATE_COUNT];
 
     EUIState m_eCurrentState = MENU;
