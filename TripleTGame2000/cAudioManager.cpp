@@ -7,7 +7,7 @@ cAudioManager::cAudioManager()
 
 cAudioManager::~cAudioManager()
 {
-	for (int i = m_Sounds.size() - 1; i >= 0; i--)
+	for (int i = std::size(m_Sounds) - 1; i >= 0; i--)
 	{
 		delete m_Sounds[i];
 	}
@@ -16,7 +16,7 @@ cAudioManager::~cAudioManager()
 
 void cAudioManager::PlaySound(ESoundType _type)
 {
-	for (int i = 0; i < m_Sounds.size(); i++)
+	for (int i = 0; i < std::size(m_Sounds); i++)
 	{
 		if (_type == m_Sounds[i]->m_Type)
 		{

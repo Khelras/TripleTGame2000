@@ -41,11 +41,11 @@ void cLevelManager::LoadLevel(int _levelID)
 		while (std::getline(LoadFileStream, LoadFileString))
 		{
 			if (LevelWidth == 0) {
-				LevelWidth = LoadFileString.size();
+				LevelWidth = std::size(LoadFileString);
 			}
-			assert(LoadFileString.size() == LevelWidth);
+			assert(std::size(LoadFileString) == LevelWidth);
 
-			for (int i = 0; i < LoadFileString.size(); i++)
+			for (int i = 0; i < std::size(LoadFileString); i++)
 			{
 				m_LoadedLevelChars.push_back(LoadFileString[i]);
 			}
@@ -70,11 +70,11 @@ void cLevelManager::LoadIDChars(int _levelID)
 		while (std::getline(LoadFileStream, LoadFileString))
 		{
 			if (LevelWidth == 0) {
-				LevelWidth = LoadFileString.size();
+				LevelWidth = std::size(LoadFileString);
 			}
-			assert(LoadFileString.size() == LevelWidth);
+			assert(std::size(LoadFileString) == LevelWidth);
 
-			for (int i = 0; i < LoadFileString.size(); i++)
+			for (int i = 0; i < std::size(LoadFileString); i++)
 			{
 				m_LevelIDChars.push_back(LoadFileString[i]);
 			}
