@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Audio.hpp"
+#include <vector>
 #include <string>
 
 enum ESoundType

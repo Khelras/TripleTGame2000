@@ -2,6 +2,7 @@
 #include "CUIManager.h"
 #include "CInputHandler.h"
 #include "cCamera.h"
+#include "cGameObject.h"
 
 // Turns seconds into "1:05" for the timer label
 static std::string FormatTime(float _seconds)
@@ -40,6 +41,7 @@ cProjectManager::cProjectManager()
 cProjectManager::~cProjectManager()
 {
 }
+
 
 
 
