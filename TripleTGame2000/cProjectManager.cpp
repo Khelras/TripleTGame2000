@@ -1,7 +1,7 @@
 #include "cProjectManager.h"
 #include "CUIManager.h"
 #include "CInputHandler.h"
-
+#include "cCamera.h"
 
 cProjectManager::cProjectManager()
 {
@@ -15,6 +15,8 @@ cProjectManager::cProjectManager()
 
 
     m_DeltaTime = 0.0f;
+
+    m_MainCamera = new cCamera(sf::Vector2f(m_WindowWidth / 2, m_WindowHeight / 2), sf::Vector2f(m_WindowWidth, m_WindowHeight));
 }
 cProjectManager::~cProjectManager()
 {
@@ -105,6 +107,7 @@ void cProjectManager::WindowDraw()
     // ~~~~~~~~~~~~~~~~~~~~~~~~ //
 
     m_Window.clear();
+    m_Window.setView(*m_MainCamera->m_CameraView);
 
     // Game drawing goes here for when the UI is in the GAME state
     if (UIManager->GetCurrentState() == GAME)

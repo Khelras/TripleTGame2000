@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-
+class cCamera;
 
 class cProjectManager
 {
@@ -43,6 +43,6 @@ private:
 	float m_DeltaTime;
 
 	//// ~ CAMERAS
-	//cCamera* m_MainCamera;
+	cCamera* m_MainCamera;
 };
 
