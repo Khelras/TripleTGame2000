@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="TripleTGame2000/TripleTGame2000.vcxproj" Id="4a5a8135-10f2-49e2-8107-12733bc7b950" />
+</Solution>
