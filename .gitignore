@@ -113,3 +113,11 @@ x86/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+### Dependencies
+# Box2D source clone + its CMake build folders. Only the built output in
+# dependencies/box2d/ (include + lib) is committed, same as SFML.
+TripleTGame2000/dependencies/box2d-src/
+
+# MSBuild intermediate objects (the nested project-name folder)
+TripleTGame2000/TripleTGame2000/

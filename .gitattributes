@@ -1,0 +1,16 @@
+# Normalise line endings: store LF in the repo, check out native on disk.
+# Without this, Visual Studio saving files as CRLF makes every file look modified.
+* text=auto
+
+# Never touch these - line-ending conversion would corrupt them.
+*.lib binary
+*.dll binary
+*.exe binary
+*.pdb binary
+*.png binary
+*.jpg binary
+*.otf binary
+*.ttf binary
+*.wav binary
+*.ogg binary
+*.flac binary
