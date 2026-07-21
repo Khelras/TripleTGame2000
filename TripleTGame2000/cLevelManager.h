@@ -2,14 +2,14 @@
 
 #include "SFML/Graphics.hpp"
 #include <vector>
-#include "string"
+#include <string>
 
 class cAudioManager;
 
 class cLevelManager
 {
 public:
-	cLevelManager();
+	cLevelManager(cAudioManager* _audiomanager);
 	~cLevelManager();
 
 	//std::vector<cActor*> m_Actors;
@@ -73,17 +73,18 @@ private:
 	// Purpose: Creates all actors in the level
 	void CreateActors();
 
-	// Purpose: Connects triggerable actors to the triggers in the level
-	void ConnectTriggerActors();
+	//// Purpose: Connects triggerable actors to the triggers in the level
+	//void ConnectTriggerActors();
 
-	// Purpose: Spawns dynamic objects in the level
-	void SpawnDynamicObjects();
+	//// Purpose: Spawns dynamic objects in the level
+	//void SpawnDynamicObjects();
 
 
 	//cPlayer* m_PlayerPointer;
 	//cNextLevelBlock* m_NextLevelBlockPointer;
 	//LevelType m_LevelType;
 	//cPhysicsManager* m_GlobalPhysicsManager;
+
 	cAudioManager* m_GlobalAudioManager;
 
 	int m_CurrentLevelID;

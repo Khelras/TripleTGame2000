@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "cLevelManager.h"
+#include "cAudioManager.h"
 #include <iostream>
 #include <vector>
 
@@ -44,5 +46,8 @@ private:
 
 	//// ~ CAMERAS
 	cCamera* m_MainCamera;
+
+	cAudioManager m_GlobalAudioManager;
+	cLevelManager* m_LevelManager;
 };
 

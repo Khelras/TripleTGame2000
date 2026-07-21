@@ -2,15 +2,17 @@
 #include "cAudioManager.h"
 #include <fstream> // Include fstream for reading
 
-cLevelManager::cLevelManager()
+cLevelManager::cLevelManager(cAudioManager* _audiomanager)
 {
-	m_GlobalAudioManager = new cAudioManager();
+	m_GlobalAudioManager = _audiomanager;
+	m_CurrentLevelID = 0;
+
+	m_LevelFilePaths.push_back("Levels/Level1.txt");
+	m_LevelIDFilePaths.push_back("Levels/Level1IDs.txt");
 }
 
 cLevelManager::~cLevelManager()
 {
-	m_LevelFilePaths.push_back("Levels/Level1.txt");
-	m_LevelIDFilePaths.push_back("Levels/Level1IDs.txt");
 }
 
 
@@ -109,6 +111,14 @@ void cLevelManager::CreateActors()
 
 void cLevelManager::Update(float _deltatime)
 {
+}
+
+void cLevelManager::Draw(sf::RenderWindow* _window)
+{
+	//for (int i = 0; i < m_Actors.size(); i++)
+	//{
+	//	_window->draw(m_Actors[i]->GetSprite());
+	//}
 }
 
 

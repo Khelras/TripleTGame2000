@@ -146,7 +146,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cAudioManager.cpp" />
-    <ClCompile Include="cGameManager.cpp" />
+    <ClCompile Include="cCamera.cpp" />
+    <ClCompile Include="cLevelManager.cpp" />
     <ClCompile Include="cProjectManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CButton.cpp" />
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="cAudioManager.h" />
     <ClInclude Include="CButton.h" />
+    <ClInclude Include="cCamera.h" />
     <ClInclude Include="cLevelManager.h" />
     <ClInclude Include="cProjectManager.h" />
     <ClInclude Include="CUIManager.h" />

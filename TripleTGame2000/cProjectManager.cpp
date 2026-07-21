@@ -17,6 +17,12 @@ cProjectManager::cProjectManager()
     m_DeltaTime = 0.0f;
 
     m_MainCamera = new cCamera(sf::Vector2f(m_WindowWidth / 2, m_WindowHeight / 2), sf::Vector2f(m_WindowWidth, m_WindowHeight));
+
+
+
+    // ~~~ Make the level and load the first level ~~~ //
+    m_LevelManager = new cLevelManager(&m_GlobalAudioManager);
+    m_LevelManager->LoadLevel(0);
 }
 cProjectManager::~cProjectManager()
 {
@@ -57,6 +63,8 @@ void cProjectManager::Update()
     m_DeltaTime = fmin(m_DeltaTime, 1.0f / FPSCap);  // Caps to FPSCap
     m_Clock.restart();
 
+
+    m_LevelManager->Update(m_DeltaTime);
 
 
     PollWindow();
@@ -116,7 +124,7 @@ void cProjectManager::WindowDraw()
         sf::Vector2f p1Move = InputHandler->InputVector(PLAYER_ONE);
         sf::Vector2f p2Move = InputHandler->InputVector(PLAYER_TWO);
 
-        // e.g. Levels->Draw(window, ui->GetSelectedLevel());
+        m_LevelManager->Draw(&m_Window);
     }
 
     UIManager->Draw(m_Window);
