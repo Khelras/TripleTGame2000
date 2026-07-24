@@ -1,11 +1,15 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <string>
 
 enum EObjectType
 {
 	NONE = 0,
 	WALL = 1,
+	TRIGGER = 2,
+	TRIGGERABLE = 3,
 };
 
 class cGameObject
@@ -41,5 +45,7 @@ protected:
 	sf::Angle m_Angle;
 	std::shared_ptr<sf::Sprite> m_Sprite;
 	bool m_IsDynamic;
+
+	EObjectType m_ObjType;
 };
 

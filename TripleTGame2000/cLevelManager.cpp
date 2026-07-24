@@ -4,11 +4,13 @@
 #include <fstream> // Include fstream for reading
 
 // GameObject includes so LevelManager can spawn them
+#include "cTriggerableObj.h"
+#include "cTriggerObj.h"
 #include "cCube.h"
 
-cLevelManager::cLevelManager(cAudioManager* _audiomanager)
+cLevelManager::cLevelManager(cAudioManager* _AudioManager)
 {
-	m_GlobalAudioManager = _audiomanager;
+	m_GlobalAudioManager = _AudioManager;
 	m_CurrentLevelID = 0;
 
 	m_LevelFilePaths.push_back("Levels/Level1.txt");
@@ -86,19 +88,12 @@ void cLevelManager::LoadIDChars(int _levelID)
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 void cLevelManager::Unloadlevel()
 {
-	//// Clear Actors
-	//for (int i = 0; i < m_Actors.size(); i++)
-	//{
-	//	delete m_Actors[i];
-	//	m_Actors[i] = nullptr;
-	//}
-	//m_Actors.clear();
-
 	// Clear vectors
+	m_GameObjects.clear();
 	m_LoadedLevelChars.clear();
 	m_LevelIDChars.clear();
-	//m_TriggerActors.clear();
-	//m_TriggerableActors.clear();
+	m_TriggerObjects.clear();
+	m_TriggerableObjects.clear();
 	//m_DynamicObjectsToSpawn.clear();
 	//m_DynamicObjectSpawnLocations.clear();
 
@@ -117,7 +112,7 @@ void cLevelManager::CreateActors()
 		for (int x = 0; x < LevelWidth; x++)
 		{
 			// Actor Pointers & Other Variables
-			cGameObject* NewActor = nullptr;
+			std::shared_ptr<cGameObject> NewActor = nullptr;
 
 
 			sf::Vector2f CurrentSpawnPosition = sf::Vector2f(x * TileSize, y * TileSize);
@@ -130,11 +125,11 @@ void cLevelManager::CreateActors()
 			{
 				// LabTile (X)
 				case 'X':
-					NewActor = new cCube(cTextureManager::GetInstance().m_CubeTex, IsDynamic);
+					NewActor = std::make_shared<cCube>(cTextureManager::GetInstance().m_CubeTex, IsDynamic);
 					NewActor->SetPosition(CurrentSpawnPosition);
 					//NewActor->SetSpawnPosition(CurrentSpawnPosition);
 
-					m_Actors.push_back(NewActor);
+					m_GameObjects.push_back(NewActor);
 					break;
 
 				default:
@@ -144,7 +139,24 @@ void cLevelManager::CreateActors()
 	}
 
 	//SpawnDynamicObjects();
-	//ConnectTriggerActors();
+	ConnectTriggerables();
+}
+
+void cLevelManager::ConnectTriggerables()
+{
+	for (int i = 0; i < m_TriggerableObjects.size(); i++)
+	{
+		int CurrentID = m_TriggerableObjects[i]->GetID();
+
+		// Connect Every Trigger that has the same ID
+		for (int j = 0; j < m_TriggerObjects.size(); j++)
+		{
+			if (CurrentID == m_TriggerObjects[j]->GetID())
+			{
+				m_TriggerObjects[j]->SetConnectedActor(m_TriggerableObjects[i]);
+			}
+		}
+	}
 }
 
 void cLevelManager::Update(float _deltatime)
@@ -153,9 +165,9 @@ void cLevelManager::Update(float _deltatime)
 
 void cLevelManager::Draw(sf::RenderWindow* _window)
 {
-	for (int i = 0; i < m_Actors.size(); i++)
+	for (int i = 0; i < m_GameObjects.size(); i++)
 	{
-		_window->draw(m_Actors[i]->GetSprite());
+		_window->draw(m_GameObjects[i]->GetSprite());
 	}
 }
 
@@ -166,4 +178,9 @@ void cLevelManager::Draw(sf::RenderWindow* _window)
 int cLevelManager::GetCurrentLevelID()
 {
 	return m_CurrentLevelID;
+}
+
+std::vector<std::shared_ptr<cTriggerableObj>> cLevelManager::GetTriggerablesVec()
+{
+	return m_TriggerableObjects;
 }

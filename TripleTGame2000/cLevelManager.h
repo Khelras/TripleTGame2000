@@ -6,18 +6,17 @@
 #include <string>
 
 class cAudioManager;
+class cTriggerObj;
+class cTriggerableObj;
 
 class cLevelManager
 {
 public:
-	cLevelManager(cAudioManager* _audiomanager);
+	cLevelManager(cAudioManager* _AudioManager);
 	~cLevelManager();
 
-	std::vector<cGameObject*> m_Actors;
-	//std::vector<cTriggerActor*> m_TriggerActors;
-	//std::vector<cTriggerableActor*> m_TriggerableActors;
 
-	//std::vector<ActorType> m_DynamicObjectsToSpawn;
+	//std::vector<EObjectType> m_DynamicObjectsToSpawn;
 	std::vector<sf::Vector2f> m_DynamicObjectSpawnLocations;
 
 	std::vector<char> m_LoadedLevelChars;
@@ -44,27 +43,22 @@ public:
 	void Update(float _deltatime);
 
 	//// Purpose: Retrieves the player pointer
-	//// Return: A pointer to the player
 	//cPlayer* GetPlayerPointer();
 
 	//// Purpose: Retrieves the level type
-	//// Return: The level type
 	//LevelType GetLevelType();
 
 	//// Purpose: Retrieves the physics manager
-	//// Return: A pointer to the physics manager
 	//cPhysicsManager* GetPhysicsManager();
 
 	// Purpose: Retrieves the current level ID
-	// Return: The level ID
 	int GetCurrentLevelID();
 
-	//// Purpose: Retrieves the vector of triggerable actors
-	//// Return: A vector of triggerable actor pointers
-	//std::vector<cTriggerableActor*> GetTriggerablesVec();
+	// Purpose: Retrieves the vector of triggerable objects
+	std::vector<std::shared_ptr<cTriggerableObj>> GetTriggerablesVec();
 
 	//// Purpose: Sets the player pointer
-	//void SetPlayerPointer(cPlayer* _player);
+	//oid SetPlayerPointer(cPlayer* _player);
 
 
 private:
@@ -74,12 +68,16 @@ private:
 	// Purpose: Creates all actors in the level
 	void CreateActors();
 
-	//// Purpose: Connects triggerable actors to the triggers in the level
-	//void ConnectTriggerActors();
+	// Purpose: Connects triggerable objects to the triggers in the level
+	void ConnectTriggerables();
 
 	//// Purpose: Spawns dynamic objects in the level
 	//void SpawnDynamicObjects();
 
+
+	std::vector<std::shared_ptr<cGameObject>> m_GameObjects;
+	std::vector<std::shared_ptr<cTriggerObj>> m_TriggerObjects;
+	std::vector<std::shared_ptr<cTriggerableObj>> m_TriggerableObjects;
 
 	//cPlayer* m_PlayerPointer;
 	//cNextLevelBlock* m_NextLevelBlockPointer;

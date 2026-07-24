@@ -152,6 +152,8 @@
     <ClCompile Include="cLevelManager.cpp" />
     <ClCompile Include="cProjectManager.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
+    <ClCompile Include="cTriggerableObj.cpp" />
+    <ClCompile Include="cTriggerObj.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CButton.cpp" />
     <ClCompile Include="CUIManager.cpp" />
@@ -166,6 +168,8 @@
     <ClInclude Include="cLevelManager.h" />
     <ClInclude Include="cProjectManager.h" />
     <ClInclude Include="cTextureManager.h" />
+    <ClInclude Include="cTriggerableObj.h" />
+    <ClInclude Include="cTriggerObj.h" />
     <ClInclude Include="CUIManager.h" />
     <ClInclude Include="CInputHandler.h" />
   </ItemGroup>

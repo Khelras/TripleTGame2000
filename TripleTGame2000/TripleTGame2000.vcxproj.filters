@@ -19,6 +19,18 @@
     <Filter Include="Header Files\GameObjects">
       <UniqueIdentifier>{ed816faa-c1fe-40f5-935e-86fed5473dd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects\Triggers">
+      <UniqueIdentifier>{04f9fc69-906c-450d-b5aa-a66f87ca45d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Triggerables">
+      <UniqueIdentifier>{3b756ed1-c4e0-41e9-b4e7-f4ffacaab2d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Triggers">
+      <UniqueIdentifier>{7b61381c-16a4-4b5f-a001-b6c00de7d67b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Triggerables">
+      <UniqueIdentifier>{d4a4c8b9-9305-42cb-8ee5-94e27ac53ad2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +66,12 @@
     <ClCompile Include="cTextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cTriggerObj.cpp">
+      <Filter>Source Files\GameObjects\Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="cTriggerableObj.cpp">
+      <Filter>Source Files\GameObjects\Triggerables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CButton.h">
@@ -85,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="cTextureManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cTriggerObj.h">
+      <Filter>Header Files\GameObjects\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="cTriggerableObj.h">
+      <Filter>Header Files\GameObjects\Triggerables</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
