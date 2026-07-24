@@ -151,6 +151,7 @@
     <ClCompile Include="cGameObject.cpp" />
     <ClCompile Include="cLevelManager.cpp" />
     <ClCompile Include="cProjectManager.cpp" />
+    <ClCompile Include="cSpriteRenderer.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTriggerableObj.cpp" />
     <ClCompile Include="cTriggerObj.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="cGameObject.h" />
     <ClInclude Include="cLevelManager.h" />
     <ClInclude Include="cProjectManager.h" />
+    <ClInclude Include="cSpriteRenderer.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTriggerableObj.h" />
     <ClInclude Include="cTriggerObj.h" />

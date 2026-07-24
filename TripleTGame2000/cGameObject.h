@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "cSpriteRenderer.h"
 #include <iostream>
 #include <string>
 
@@ -16,10 +17,11 @@ class cGameObject
 {
 public:
 	cGameObject(std::shared_ptr<sf::Texture> _Texture, bool _IsDynamic);
+	cGameObject(std::shared_ptr<sf::Texture> _Texture, bool _IsDynamic, sAnimationInfo _AnimInfo, int _FrameWidth, int _FrameHeight);
 	~cGameObject();
 
 	virtual void Start() = 0;
-	virtual void Update() = 0;
+	virtual void Update(float _DeltaTime) = 0;
 
 	// Purpose: Draws Object to the window
 	virtual void Draw(sf::RenderWindow* _Window);
@@ -32,7 +34,7 @@ public:
 
 	void SetScale(sf::Vector2f _Scale);
 
-	sf::Sprite& GetSprite() const;
+	sf::Sprite& GetSprite();
 
 	// Purpose: Caluclates an angle of the input vector
 	sf::Angle CalculateAngle(sf::Vector2f _Vector);
@@ -43,7 +45,7 @@ protected:
 
 	sf::Vector2f m_Position;
 	sf::Angle m_Angle;
-	std::shared_ptr<sf::Sprite> m_Sprite;
+	cSpriteRenderer m_SpriteRenderer;
 	bool m_IsDynamic;
 
 	EObjectType m_ObjType;

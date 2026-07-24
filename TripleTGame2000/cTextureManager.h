@@ -15,6 +15,7 @@ public:
 	}
 
 	std::shared_ptr<sf::Texture> m_CubeTex;
+	std::shared_ptr<sf::Texture> m_TestAnimTex;
 
 private:
 	cTextureManager();

@@ -72,6 +72,9 @@
     <ClCompile Include="cTriggerableObj.cpp">
       <Filter>Source Files\GameObjects\Triggerables</Filter>
     </ClCompile>
+    <ClCompile Include="cSpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CButton.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="cTriggerableObj.h">
       <Filter>Header Files\GameObjects\Triggerables</Filter>
+    </ClInclude>
+    <ClInclude Include="cSpriteRenderer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

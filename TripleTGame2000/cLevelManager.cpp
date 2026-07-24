@@ -119,7 +119,7 @@ void cLevelManager::CreateActors()
 			bool TriggerOnActivate = true;
 			bool IsntDynamic = false;
 			bool IsDynamic = true;
-
+			sAnimationInfo AnimInfo(0, 0, 7, 0, 12.0f);
 
 			switch (m_LoadedLevelChars[y * LevelWidth + x])
 			{
@@ -132,9 +132,20 @@ void cLevelManager::CreateActors()
 					m_GameObjects.push_back(NewActor);
 					break;
 
+					// DissapearingPlatform (T)
+				case 'T':
+					
+					NewActor = std::make_shared<cCube>(cTextureManager::GetInstance().m_TestAnimTex, IsDynamic, AnimInfo, 32, 32);
+					NewActor->SetPosition(CurrentSpawnPosition);
+					//NewActor->SetSpawnPosition(CurrentSpawnPosition);
+
+					m_GameObjects.push_back(NewActor);
+					break;
+
 				default:
 					break;
 			}
+
 		}
 	}
 
@@ -161,6 +172,10 @@ void cLevelManager::ConnectTriggerables()
 
 void cLevelManager::Update(float _deltatime)
 {
+	for (int i = 0; i < m_GameObjects.size(); i++)
+	{
+		m_GameObjects[i]->Update(_deltatime);
+	}
 }
 
 void cLevelManager::Draw(sf::RenderWindow* _window)
