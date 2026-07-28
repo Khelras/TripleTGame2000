@@ -9,7 +9,6 @@ cSpriteRenderer::cSpriteRenderer()
     m_Texture = std::make_shared<sf::Texture>(*TextureManager.m_CubeTex);
     m_Sprite = std::make_shared<sf::Sprite>(*m_Texture);
 
-    m_AnimInfo.m_DoesAnimationLoop = true;
 }
 
 cSpriteRenderer::~cSpriteRenderer()
@@ -129,12 +128,6 @@ void cSpriteRenderer::SetAnimationSpeed(float _Speed)
 {
 	m_AnimInfo.m_AnimSpeed = _Speed;
 }
-
-void cSpriteRenderer::SetDoesnAnimLoop(bool _DoesAnimLoop)
-{
-	m_AnimInfo.m_DoesAnimationLoop = _DoesAnimLoop;
-}
-
 
 std::shared_ptr<sf::Sprite> cSpriteRenderer::GetSprite()
 {

@@ -119,11 +119,11 @@ void cLevelManager::CreateActors()
 			bool TriggerOnActivate = true;
 			bool IsntDynamic = false;
 			bool IsDynamic = true;
-			sAnimationInfo AnimInfo(0, 0, 7, 0, 12.0f);
+			sAnimationInfo TestAnimInfo(0, 0, 7, 0, 12.0f);
 
 			switch (m_LoadedLevelChars[y * LevelWidth + x])
 			{
-				// LabTile (X)
+				// Cube (X)
 				case 'X':
 					NewActor = std::make_shared<cCube>(cTextureManager::GetInstance().m_CubeTex, IsDynamic);
 					NewActor->SetPosition(CurrentSpawnPosition);
@@ -132,10 +132,10 @@ void cLevelManager::CreateActors()
 					m_GameObjects.push_back(NewActor);
 					break;
 
-					// DissapearingPlatform (T)
+				// DissapearingPlatform (T)
 				case 'T':
 					
-					NewActor = std::make_shared<cCube>(cTextureManager::GetInstance().m_TestAnimTex, IsDynamic, AnimInfo, 32, 32);
+					NewActor = std::make_shared<cCube>(cTextureManager::GetInstance().m_TestAnimTex, IsDynamic, TestAnimInfo, 32, 32);
 					NewActor->SetPosition(CurrentSpawnPosition);
 					//NewActor->SetSpawnPosition(CurrentSpawnPosition);
 
@@ -169,7 +169,7 @@ void cLevelManager::ConnectTriggerables()
 		}
 	}
 }
-
+/// <summary> Update all m_GameObjects /// </summary>
 void cLevelManager::Update(float _deltatime)
 {
 	for (int i = 0; i < m_GameObjects.size(); i++)

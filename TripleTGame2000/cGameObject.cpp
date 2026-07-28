@@ -22,6 +22,8 @@ cGameObject::cGameObject(std::shared_ptr<sf::Texture> _Texture, bool _IsDynamic,
 	m_SpriteRenderer.InitializeSprite(_Texture, _FrameWidth, _FrameHeight);
 	m_SpriteRenderer.SetSpriteAnimation(_AnimInfo);
 	SetPosition(m_Position);
+
+	m_Angle = sf::degrees(0.0f);
 }
 
 cGameObject::~cGameObject()

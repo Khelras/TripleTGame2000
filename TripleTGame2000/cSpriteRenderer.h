@@ -28,9 +28,6 @@ struct sAnimationInfo
 		m_AnimYCurrent = 0;
 		m_AnimSpeed = _AnimSpeed;
 		m_AnimTimer = 0.0f;
-
-		if (_LoopNum == 1) m_DoesAnimationLoop = false;
-		else			   m_DoesAnimationLoop = true;
 	}
 
 	sAnimationInfo() 
@@ -51,7 +48,6 @@ struct sAnimationInfo
 	float m_AnimTimer = 0.0f;
 
 	int m_LoopAmount = -1;
-	bool m_DoesAnimationLoop = true;
 };
 
 class cSpriteRenderer
@@ -84,9 +80,6 @@ public:
 
 	// Purpose: Sets the speed of the sprite animation
 	void SetAnimationSpeed(float _Speed);
-
-	// Purpose: Sets whether the current animation should loop
-	void SetDoesnAnimLoop(bool _DoesAnimLoop);
 
 	// Purpose: Returns Pointer to the sprite
 	std::shared_ptr<sf::Sprite> GetSprite();
