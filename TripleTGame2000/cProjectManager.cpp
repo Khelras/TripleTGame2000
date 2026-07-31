@@ -3,6 +3,7 @@
 #include "CInputHandler.h"
 #include "cCamera.h"
 #include "cGameObject.h"
+#include "cCharacterController.h"
 
 // Turns seconds into "1:05" for the timer label
 static std::string FormatTime(float _seconds)
@@ -78,11 +79,14 @@ void cProjectManager::Update()
     m_DeltaTime = fmin(m_DeltaTime, 1.0f / FPSCap); // Caps to FPSCap
     m_Clock.restart();
 
-
-    m_LevelManager->Update(m_DeltaTime);
-
-    UpdateGame();
     PollWindow();
+    UpdateGame();
+
+    if (CUIManager::getInstance()->GetCurrentState() == GAME)
+    {
+        m_LevelManager->Update(m_DeltaTime);
+    }
+
     WindowDraw();
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
