@@ -4,6 +4,9 @@
 #include "cGameObject.h"
 #include <vector>
 #include <string>
+#include <box2d/box2d.h>
+#include <memory>
+#include "cCharacterController.h"
 
 class cAudioManager;
 class cTriggerObj;
@@ -74,6 +77,9 @@ private:
 	//// Purpose: Spawns dynamic objects in the level
 	//void SpawnDynamicObjects();
 
+	// Purpose: Creates a static body in the Box2D world at the specified position and size
+	void CreateStaticBody(const sf::Vector2f& position, const sf::Vector2f& size);
+	void CreateMergedStaticObjects(); // Merges adjacent static bodies into a single body
 
 	std::vector<std::shared_ptr<cGameObject>> m_GameObjects;
 	std::vector<std::shared_ptr<cTriggerObj>> m_TriggerObjects;
@@ -87,4 +93,13 @@ private:
 	cAudioManager* m_GlobalAudioManager;
 
 	int m_CurrentLevelID;
+
+	//make a unique pointer to the player character controllers
+	std::unique_ptr <cCharacterController> m_Rock;
+	std::unique_ptr <cCharacterController> m_Air;
+
+	b2World m_world{ b2Vec2(0.0f, 0.0f) }; // Initialize Box2D world with zero gravity
+
+	std::vector<b2Body*> m_staticBodies; // Store static bodies for cleanup
+
 };
