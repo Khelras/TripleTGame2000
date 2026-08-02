@@ -253,7 +253,7 @@ void cLevelManager::CreateMergedStaticObjects()
 				// Check for horizontal merge
 				while (x + width < LevelWidth)
 				{
-					int index = y * LevelWidth * x + width;
+					int index = y * LevelWidth + (x + width);
 
 					if (m_LoadedLevelChars[index] != 'X' || used[index])
 					{
